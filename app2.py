@@ -1,9 +1,34 @@
 import streamlit as st
 import math
 
+# Function to track the number of visits
+def update_visit_count():
+    if 'visit_count' not in st.session_state:
+        st.session_state['visit_count'] = 1
+    else:
+        st.session_state['visit_count'] += 1
+
+# Add background image (Google Maps of Thailand)
+def add_bg_from_url():
+    st.markdown(
+         f"""
+         <style>
+         .stApp {{
+             background-image: url("https://maps.googleapis.com/maps/api/staticmap?center=Thailand&zoom=5&size=640x480&key=YOUR_GOOGLE_MAPS_API_KEY");
+             background-size: cover;
+         }}
+         </style>
+         """,
+         unsafe_allow_html=True
+     )
+
 # Define the menu and the functions
 def menu():
     st.title("Vehicle Calculator Application")
+
+    # Display visit count
+    st.write(f"**Number of visits to the app:** {st.session_state['visit_count']}")
+
     st.write("Choose a function from the sidebar to start using the app:")
 
     # Sidebar options
@@ -71,4 +96,7 @@ def คำนวณแรงม้า():
         st.warning("Time must be greater than 0")
 
 # Run the app
-menu()
+if __name__ == "__main__":
+    add_bg_from_url()  # Add the background map
+    update_visit_count()  # Track the number of visits
+    menu()
