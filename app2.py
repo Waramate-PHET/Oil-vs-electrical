@@ -8,45 +8,39 @@ def update_visit_count():
     else:
         st.session_state['visit_count'] += 1
 
-# Add background image (Google Maps of Thailand)
-def add_bg_from_url():
+# Add background image and dark theme styling
+def add_custom_css():
     st.markdown(
          f"""
          <style>
          .stApp {{
-             background-image: url("https://maps.googleapis.com/maps/api/staticmap?center=Thailand&zoom=5&size=640x480&key=YOUR_GOOGLE_MAPS_API_KEY");
+             background-image: url("https://images-storage.thaiware.site/tips/2020_11/images/1433_20111714250002_67.png");
              background-size: cover;
+             background-position: center;
+             background-repeat: no-repeat;
+             background-attachment: fixed;
+             color: white;
+         }}
+         .stButton > button {{
+             background-color: #4CAF50;
+             color: white;
+             padding: 10px 20px;
+             border: none;
+             border-radius: 8px;
+             text-align: center;
+             text-decoration: none;
+             display: inline-block;
+             font-size: 16px;
+         }}
+         .stButton > button:hover {{
+             background-color: #45a049;
          }}
          </style>
          """,
          unsafe_allow_html=True
      )
 
-# Define the menu and the functions
-def menu():
-    st.title("Vehicle Calculator Application")
-
-    # Display visit count
-    st.write(f"**Number of visits to the app:** {st.session_state['visit_count']}")
-
-    st.write("Choose a function from the sidebar to start using the app:")
-
-    # Sidebar options
-    choice = st.sidebar.selectbox("Select Function:", 
-                                  ("Speed, Time, Fuel and Cost Calculation", 
-                                   "Vehicle Speed in RPM Calculation", 
-                                   "Horsepower Calculation", 
-                                   "Exit"))
-
-    if choice == "Speed, Time, Fuel and Cost Calculation":
-        คำนวณความเร็วเวลาและปริมาณค่าน้ำมัน()
-    elif choice == "Vehicle Speed in RPM Calculation":
-        คำนวณความเร็วรถเป็นรอบต่อนาทีของล้อต่อนาที()
-    elif choice == "Horsepower Calculation":
-        คำนวณแรงม้า()
-    elif choice == "Exit":
-        st.write("Thank you for using the app!")
-
+# Define the functions
 def คำนวณความเร็วเวลาและปริมาณค่าน้ำมัน():
     st.header("Speed, Time, Fuel and Cost Calculation")
     # Input fields
@@ -95,8 +89,32 @@ def คำนวณแรงม้า():
     else:
         st.warning("Time must be greater than 0")
 
+# Main menu with buttons
+def menu():
+    st.title("Vehicle Calculator Application")
+
+    # Display visit count
+    st.write(f"**Number of visits to the app:** {st.session_state['visit_count']}")
+
+    # Add buttons for different functionalities
+    st.write("Choose a function below:")
+    
+    col1, col2, col3 = st.columns(3)
+    
+    with col1:
+        if st.button("Speed, Time, Fuel and Cost Calculation"):
+            คำนวณความเร็วเวลาและปริมาณค่าน้ำมัน()
+    
+    with col2:
+        if st.button("Vehicle Speed in RPM Calculation"):
+            คำนวณความเร็วรถเป็นรอบต่อนาทีของล้อต่อนาที()
+    
+    with col3:
+        if st.button("Horsepower Calculation"):
+            คำนวณแรงม้า()
+
 # Run the app
 if __name__ == "__main__":
-    add_bg_from_url()  # Add the background map
+    add_custom_css()  # Add custom styling
     update_visit_count()  # Track the number of visits
     menu()
