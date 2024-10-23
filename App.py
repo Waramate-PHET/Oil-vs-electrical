@@ -9,3 +9,4 @@ else:
     st.wriye("OK")
     st.write("Test")
     st.write("yoyoyoy")
+    st.write("HELLO WORLD")
