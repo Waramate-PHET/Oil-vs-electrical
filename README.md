@@ -1,4 +1,4 @@
-ถที่ใช้น้ำมัน vs รถใช้ไฟฟ้า (Oil vs Electric Vehicle Comparison)
+รถที่ใช้น้ำมัน vs รถใช้ไฟฟ้า (Oil vs Electric Vehicle Comparison)
 ---
 
 Overview
