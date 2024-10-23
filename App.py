@@ -7,3 +7,4 @@ if st.button("Click Me!"):
 else:
     st.write("Please click the button.")
     st.wriye("OK")
+    st.write("Test")
