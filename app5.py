@@ -58,7 +58,7 @@ def comparison_page():
     # Select EV Car Brand and Model
     with col1:
         st.header("รถใช้ไฟฟ้า")
-        ev_car_brand = st.selectbox("เลือกยี่ห้อรถไฟฟ้า", [brand for brand in car_data if car_data[brand][list(car_data[brand].keys())[0]]['type'] == 'EV'])
+        ev_car_brand = st.selectbox("เลือกยี่ห้อรถไฟฟ้า", list(car_data.keys()))
         ev_car_model = st.selectbox("เลือกรุ่นรถไฟฟ้า", list(car_data[ev_car_brand].keys()))
 
         ev_car_info = car_data[ev_car_brand][ev_car_model]
@@ -78,7 +78,7 @@ def comparison_page():
     # Select Gasoline Car Brand and Model
     with col2:
         st.header("รถใช้น้ำมัน")
-        gas_car_brand = st.selectbox("เลือกยี่ห้อรถน้ำมัน", [brand for brand in car_data if car_data[brand][list(car_data[brand].keys())[0]]['type'] == 'Gasoline'])
+        gas_car_brand = st.selectbox("เลือกยี่ห้อรถน้ำมัน", list(car_data.keys()))
         gas_car_model = st.selectbox("เลือกรุ่นรถน้ำมัน", list(car_data[gas_car_brand].keys()))
 
         gas_car_info = car_data[gas_car_brand][gas_car_model]
@@ -86,19 +86,17 @@ def comparison_page():
         st.write(f"อัตราสิ้นเปลืองน้ำมัน: {gas_car_info['fuel_efficiency']} กม./ลิตร")
         st.write(f"ประเภทน้ำมัน: {gas_car_info['fuel_type']}")
 
-        # Add types of Gasohol available in Thailand
-        st.write("เลือกประเภท Gasohol")
-        fuel_type = st.selectbox("ประเภทน้ำมัน", ["Gasohol 91", "Gasohol 95", "E20", "E85", "Benzene", "Diesel"])
-
-        # Input for the price of fuel
-        st.write("กรอกราคาน้ำมัน (บาท/ลิตร)")
-        fuel_price = st.number_input("ราคาน้ำมัน (บาท/ลิตร)", min_value=0.0, key="fuel_price")
-
         st.write("กรอกความเร็วปกติของรถ (กม./ชม.)")
         gas_speed = st.number_input("ความเร็ว (km/h)", min_value=0.0, key="gas_speed")
 
         st.write("กรอกระยะทางที่เดินทาง (กม.)")
         gas_distance = st.number_input("ระยะทาง (km)", min_value=0.0, key="gas_distance")
+
+        st.write("กรอกประเภทน้ำมัน")
+        fuel_type = st.selectbox("ประเภทน้ำมัน", ["Benzene", "Diesel", "Gasohol"])
+
+        st.write("กรอกราคาน้ำมัน (บาท/ลิตร)")
+        fuel_price = st.number_input("ราคาน้ำมัน (บาท/ลิตร)", min_value=0.0, key="fuel_price")
 
     # Perform calculation and comparison
     if st.button("คำนวณ"):
