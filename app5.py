@@ -1,6 +1,7 @@
 import streamlit as st
 import base64
 import requests
+from datetime import datetime
 
 # Function to add background image from URL
 def add_bg_from_url(image_url):
@@ -52,6 +53,17 @@ def get_fuel_prices(fuel_type):
     }
     return prices.get(fuel_type, 0)
 
+# Function to count the visitors and store the date and count
+def count_visitor():
+    if 'visitor_count' not in st.session_state:
+        st.session_state['visitor_count'] = 0
+        st.session_state['visit_dates'] = []
+
+    st.session_state['visitor_count'] += 1
+    st.session_state['visit_dates'].append(datetime.now().strftime('%Y-%m-%d'))
+
+    return st.session_state['visitor_count'], st.session_state['visit_dates']
+
 # Main app logic
 def main():
     if 'page' not in st.session_state:
@@ -64,8 +76,11 @@ def main():
 
 # Home page: Button to start comparison between electric and gasoline vehicles
 def home_page():
+    visitor_count, visit_dates = count_visitor()
+    
     st.title("รถที่ใช้น้ำมัน vs รถใช้ไฟฟ้า")
     st.write("เปรียบเทียบประสิทธิภาพและค่าใช้จ่ายระหว่าง รถไฟฟ้า และ รถใช้น้ำมัน")
+    st.write(f"จำนวนผู้เข้าชมทั้งหมด: {visitor_count}")
 
     if st.button('คำนวณรถที่ใช้น้ำมัน vs รถใช้ไฟฟ้า'):
         st.session_state['page'] = 'comparison'
@@ -85,7 +100,6 @@ def comparison_page():
         electricity_price = st.number_input("กรอกราคาค่าไฟฟ้า (บาท/kWh)", min_value=0.0, key="electricity_price")  # ลำดับที่ 1
         ev_distance = st.number_input("กรอกระยะทางที่เดินทาง (กม.)", min_value=0.0, key="ev_distance")  # ลำดับที่ 2
         ev_speed = st.number_input("กรอกความเร็วปกติของรถ (กม./ชม.)", min_value=0.0, key="ev_speed")  # ลำดับที่ 3
-        
 
     # Select Gasoline Car Brand and Model
     with col2:
