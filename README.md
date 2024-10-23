@@ -47,7 +47,7 @@ Copy code
 streamlit run app.py
 Access the app:
 
-After running the above command, Streamlit will provide a URL, typically http://localhost:8501/. Open this URL in your web browser to access the app.
+After running the above command, Streamlit will provide a URL, typically https://car-oil-vs-car-electrical.streamlit.app/. Open this URL in your web browser to access the app.
 
 File Structure
 bash
@@ -142,7 +142,7 @@ Copy code
 streamlit run app.py
 เข้าใช้งานแอป:
 
-หลังจากรันคำสั่งข้างต้น Streamlit จะให้ URL ซึ่งปกติจะเป็น http://localhost:8501/ ให้คุณเปิด URL นี้ในเว็บเบราว์เซอร์เพื่อใช้งานแอป
+หลังจากรันคำสั่งข้างต้น Streamlit จะให้ URL ซึ่งปกติจะเป็น https://car-oil-vs-car-electrical.streamlit.app/ ให้คุณเปิด URL นี้ในเว็บเบราว์เซอร์เพื่อใช้งานแอป
 
 โครงสร้างของไฟล์
 bash
